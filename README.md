@@ -2,6 +2,8 @@
 
 A Phoenix LiveView application for calculating fuel requirements for spacecraft missions based on mass, gravity, and flight path.
 
+![Demo](./demo.gif)
+
 ## Overview
 
 This application calculates the required fuel for spacecraft missions considering:
