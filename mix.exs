@@ -62,7 +62,7 @@ defmodule Fuelix.MixProject do
       {:gettext, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.2.0"},
-      {:super_potato, git: "https://github.com/benitezhm/super-potato.git", tag: "v0.1.1-rc.0"},
+      {:super_potato, git: "https://github.com/benitezhm/super-potato.git", tag: "v1.0.0"},
       # {:super_potato, path: "../super_potato"},
       {:bandit, "~> 1.5"},
       {:live_debugger, "~> 0.5.0", only: :dev},

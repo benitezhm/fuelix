@@ -72,26 +72,26 @@ defmodule FuelixWeb.FuelCalculatorLiveTest do
       view |> element("button", "Add Step") |> render_click()
 
       view
-      |> element("select[phx-value-index=\"1\"][phx-value-field=\"action\"]")
-      |> render_change(%{"index" => "1", "field" => "action", "value" => "land"})
+      |> element("select[name=\"action\"][phx-value-index=\"1\"]")
+      |> render_change(%{"action" => "land", "index" => "1"})
 
       view
-      |> element("select[phx-value-index=\"1\"][phx-value-field=\"planet\"]")
-      |> render_change(%{"index" => "1", "field" => "planet", "value" => "Moon"})
+      |> element("select[name=\"planet\"][phx-value-index=\"1\"]")
+      |> render_change(%{"planet" => "Moon", "index" => "1"})
 
       # Add launch Moon
       view |> element("button", "Add Step") |> render_click()
 
       view
-      |> element("select[phx-value-index=\"2\"][phx-value-field=\"planet\"]")
-      |> render_change(%{"index" => "2", "field" => "planet", "value" => "Moon"})
+      |> element("select[name=\"planet\"][phx-value-index=\"2\"]")
+      |> render_change(%{"planet" => "Moon", "index" => "2"})
 
       # Add land Earth
       view |> element("button", "Add Step") |> render_click()
 
       view
-      |> element("select[phx-value-index=\"3\"][phx-value-field=\"action\"]")
-      |> render_change(%{"index" => "3", "field" => "action", "value" => "land"})
+      |> element("select[name=\"action\"][phx-value-index=\"3\"]")
+      |> render_change(%{"action" => "land", "index" => "3"})
 
       # Check the result
       html = render(view)
@@ -112,24 +112,24 @@ defmodule FuelixWeb.FuelCalculatorLiveTest do
       view |> element("button", "Add Step") |> render_click()
 
       view
-      |> element("select[phx-value-index=\"1\"][phx-value-field=\"action\"]")
-      |> render_change(%{"index" => "1", "field" => "action", "value" => "land"})
+      |> element("select[name=\"action\"][phx-value-index=\"1\"]")
+      |> render_change(%{"action" => "land", "index" => "1"})
 
       view
-      |> element("select[phx-value-index=\"1\"][phx-value-field=\"planet\"]")
-      |> render_change(%{"index" => "1", "field" => "planet", "value" => "Mars"})
+      |> element("select[name=\"planet\"][phx-value-index=\"1\"]")
+      |> render_change(%{"planet" => "Mars", "index" => "1"})
 
       view |> element("button", "Add Step") |> render_click()
 
       view
-      |> element("select[phx-value-index=\"2\"][phx-value-field=\"planet\"]")
-      |> render_change(%{"index" => "2", "field" => "planet", "value" => "Mars"})
+      |> element("select[name=\"planet\"][phx-value-index=\"2\"]")
+      |> render_change(%{"planet" => "Mars", "index" => "2"})
 
       view |> element("button", "Add Step") |> render_click()
 
       view
-      |> element("select[phx-value-index=\"3\"][phx-value-field=\"action\"]")
-      |> render_change(%{"index" => "3", "field" => "action", "value" => "land"})
+      |> element("select[name=\"action\"][phx-value-index=\"3\"]")
+      |> render_change(%{"action" => "land", "index" => "3"})
 
       html = render(view)
       assert html =~ "33,388"
@@ -142,7 +142,8 @@ defmodule FuelixWeb.FuelCalculatorLiveTest do
       view |> element("button", "Add Step") |> render_click()
 
       html = render(view)
-      assert html =~ "Enter mass and flight path"
+      assert html =~ "Invalid mass value"
+      assert html =~ "0"
     end
 
     test "shows zero fuel when mass is zero", %{conn: conn} do
@@ -155,7 +156,7 @@ defmodule FuelixWeb.FuelCalculatorLiveTest do
       view |> element("button", "Add Step") |> render_click()
 
       html = render(view)
-      assert html =~ "Enter mass and flight path"
+      assert html =~ "Mass must be greater than 0"
     end
 
     test "shows zero fuel when flight path is empty", %{conn: conn} do
@@ -167,6 +168,7 @@ defmodule FuelixWeb.FuelCalculatorLiveTest do
 
       html = render(view)
       assert html =~ "Enter mass and flight path"
+      assert html =~ "0"
     end
 
     test "updates fuel calculation when steps are modified", %{conn: conn} do
@@ -183,8 +185,8 @@ defmodule FuelixWeb.FuelCalculatorLiveTest do
 
       # Change to land
       view
-      |> element("select[phx-value-index=\"0\"][phx-value-field=\"action\"]")
-      |> render_change(%{"index" => "0", "field" => "action", "value" => "land"})
+      |> element("select[name=\"action\"][phx-value-index=\"0\"]")
+      |> render_change(%{"action" => "land", "index" => "0"})
 
       html_after = render(view)
 
@@ -204,8 +206,8 @@ defmodule FuelixWeb.FuelCalculatorLiveTest do
       html_earth = render(view)
 
       view
-      |> element("select[phx-value-index=\"0\"][phx-value-field=\"planet\"]")
-      |> render_change(%{"index" => "0", "field" => "planet", "value" => "Moon"})
+      |> element("select[name=\"planet\"][phx-value-index=\"0\"]")
+      |> render_change(%{"planet" => "Moon", "index" => "0"})
 
       html_moon = render(view)
 

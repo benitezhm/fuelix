@@ -9,7 +9,7 @@ defmodule Fuelix.FuelCalculator do
   @planets %{
     "Earth" => 9.807,
     "Moon" => 1.62,
-    "Mars" => 3.721
+    "Mars" => 3.711
   }
 
   @doc """
@@ -49,6 +49,7 @@ defmodule Fuelix.FuelCalculator do
     with :ok <- validate_flight_path(flight_path),
          {:ok, converted_path} <- convert_flight_path(flight_path) do
       fuel = SuperPotato.calculate_required_fuel(mass, converted_path)
+
       {:ok, fuel}
     else
       {:error, reason} -> {:error, reason}
