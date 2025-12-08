@@ -1,0 +1,38 @@
+name: Elixir CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Elixir
+        uses: erlef/setup-elixir@v1
+        with:
+          elixir-version: "1.18" # Define the elixir version [required]
+          otp-version: "27" # Define the OTP version [required]
+      - name: Restore dependencies cache
+        uses: actions/cache@v4
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: ${{ runner.os }}-mix-
+      - name: Install dependencies
+        run: mix deps.get
+      - name: Run tests
+        run: |
+          mix test
+          mix coveralls.html
+      - name: Archive coveralls report
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-coverage-report
+          path: cover/excoveralls.html
+          retention-days: 5
