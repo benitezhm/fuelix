@@ -147,7 +147,7 @@ Acts as a bridge between the Phoenix LiveView UI and the SuperPotato calculation
   %{
     "Earth" => 9.807,
     "Moon" => 1.62,
-    "Mars" => 3. 721
+    "Mars" => 3.721
   }
   ```
 
@@ -227,7 +227,30 @@ mix test --cover
 - **Backend Logic**: Comprehensive tests for all calculation functions
 - **LiveView Integration**: Tests for user interactions and real-time updates
 - **Example Scenarios**: Validation against known mission profiles
-
+```
+60 tests, 0 failures
+----------------
+COV    FILE                                        LINES RELEVANT   MISSED
+  0.0% lib/fuelix.ex                                   9        0        0
+ 80.0% lib/fuelix/application.ex                      33        5        1
+ 93.7% lib/fuelix/fuel_calculator.ex                 134       32        2
+  0.0% lib/fuelix/mailer.ex                            3        0        0
+100.0% lib/fuelix_web.ex                             114        2        0
+ 15.5% lib/fuelix_web/components/core_component      498      116       98
+  0.0% lib/fuelix_web/components/layouts.ex          154       23       23
+100.0% lib/fuelix_web/controllers/error_html.ex       24        1        0
+100.0% lib/fuelix_web/controllers/error_json.ex       21        1        0
+  0.0% lib/fuelix_web/controllers/page_controll        7        1        1
+  0.0% lib/fuelix_web/controllers/page_html.ex        10        0        0
+  0.0% lib/fuelix_web/endpoint.ex                     54        0        0
+  0.0% lib/fuelix_web/gettext.ex                      25        0        0
+ 94.2% lib/fuelix_web/live/fuel_calculator_live      341       52        3
+ 66.6% lib/fuelix_web/router.ex                       44        3        1
+ 80.0% lib/fuelix_web/telemetry.ex                    70        5        1
+100.0% test/support/conn_case.ex                      37        2        0
+[TOTAL]  46.5%
+----------------
+```
 ## Precommit Checks
 
 Run the full precommit suite:

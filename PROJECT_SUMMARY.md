@@ -130,7 +130,7 @@ Acts as a bridge between the LiveView (which uses strings) and SuperPotato (whic
 @planets %{
   "Earth" => 9.807,  # m/s²
   "Moon" => 1.62,    # m/s²
-  "Mars" => 3. 721    # m/s²
+  "Mars" => 3.721    # m/s²
 }
 ```
 

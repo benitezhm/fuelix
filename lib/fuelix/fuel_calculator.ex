@@ -20,7 +20,7 @@ defmodule Fuelix.FuelCalculator do
       iex> Fuelix.FuelCalculator.planets()
       %{
         "Earth" => 9.807,
-        "Moon" => 1. 62,
+        "Moon" => 1.62,
         "Mars" => 3.721,
         ...
       }
