@@ -47,18 +47,12 @@ defmodule Fuelix.FuelCalculator do
   """
   def calculate_total_fuel(mass, flight_path) when is_number(mass) and mass > 0 do
     with :ok <- validate_flight_path(flight_path),
-         {:ok, converted_path} <- convert_flight_path(flight_path) do
-      fuel = SuperPotato.calculate_required_fuel(mass, converted_path)
-
+         {:ok, converted_path} <- convert_flight_path(flight_path),
+         {:ok, fuel} <- safely_calculate_fuel(mass, converted_path) do
       {:ok, fuel}
     else
       {:error, reason} -> {:error, reason}
     end
-  rescue
-    e in ArgumentError ->
-      {:error, Exception.message(e)}
-  catch
-    {:error, reason} -> {:error, reason}
   end
 
   def calculate_total_fuel(_mass, _flight_path) do
@@ -79,10 +73,6 @@ defmodule Fuelix.FuelCalculator do
         {:error, reason} -> {:halt, {:error, reason}}
       end
     end)
-    |> case do
-      :ok -> :ok
-      {:error, reason} -> throw({:error, reason})
-    end
   end
 
   defp validate_step_structure(%{action: _, planet: _}), do: :ok
@@ -131,4 +121,11 @@ defmodule Fuelix.FuelCalculator do
 
   defp string_to_action_atom("launch"), do: :launch
   defp string_to_action_atom("land"), do: :land
+
+  defp safely_calculate_fuel(mass, converted_path) do
+    {:ok, SuperPotato.calculate_required_fuel(mass, converted_path)}
+  rescue
+    e in ArgumentError ->
+      {:error, Exception.message(e)}
+  end
 end
